@@ -1,0 +1,85 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>HTMLへの自動カーニングスクリプト</title>
+
+<!--
+	 <script language="javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+ -->
+	<script language="javascript" src="javascript/jquery.min.js"></script>
+	<script language="javascript" src="javascript/jquery.karning.js"></script>
+	<script language="javascript" src="javascript/font/default.js"></script>
+
+	<script language="javascript">
+		function benchmark(func) {
+			var start = new Date().getTime();
+			func();
+			var end = new Date().getTime();
+
+			console.log('処理スピードは、' + (end - start) + '(ms) です。');
+		}
+
+		function init() {
+			// ベンチマークのためにタグ情報を1000個生成
+			var $h3 = $('h3:not(.no)');
+
+			$h3.each(function(idx, element) {
+				var $element = $(element);
+				var html = $(element).html();
+
+				for (var i = 0; i < 1000; i++) {
+					$element.append(html);
+				}
+			});
+
+			benchmark(function() {
+				$('h3:not(.no)').karning();
+				$('p:not(.no)').karning();
+			});
+		}
+	</script>
+</head>
+
+<body onload="init()">
+<h3 class="no">HTMLの為の、オートカーニングプログラムの実験（補正前）</h3>
+<h3>HTMLの為の、オートカーニングプログラムの実験（補正後）</h3>
+<hr/>
+
+<h3 class="no">トの扱い。コトモットテキトー二トアトイトウトエトオト（補正前）</h3>
+<h3>トの扱い。コトモットテキトー二トアトイトウトエトオト（補正後）</h3>
+<hr/>
+
+<h3 class="no">とうきょう・とっきょ・きょかきょく（補正前）</h3>
+<h3 >とうきょう・とっきょ・きょかきょく（補正後）</h3>
+<hr/>
+
+<h3 class="no">ぼくの、きゅうきょくのもくひょう（補正前）</h3>
+<h3>ぼくの、きゅうきょくのもくひょう（補正後）</h3>
+<hr/>
+
+<h3 class="no">「行頭の鍵括弧」の例「あした」、「いま」、「きのう」。（補正前）</h3>
+<h3>「行頭の鍵括弧」の例「あした」、「いま」、「きのう」。（補正後）</h3>
+<hr/>
+
+<p class="no">
+	<span style="color:red;">（補正前）</span><br/>
+	見出しだけでなく、本文のサンプル。<br/>
+	「JavaScript」による表示スピードの低下を気にしなくてよい、小さいページであれば、<br>
+	本文に対して自動カーニングを適用しても大丈夫。<br/>
+	ただし、<span style="font-weight: bold;">現在のバージョン</span>ではオートカーニング適用先の要素の中に HTMLタグ がある場合の動作は保証できない。<br />
+	<span style="font-size: 18px;">「どでかい。」</span>
+</p>
+
+<p>
+	<span style="color:red;">（補正後）</span><br/>
+	見出しだけでなく、本文のサンプル。<br/>
+	「JavaScript」による表示スピードの低下を気にしなくてよい、小さいページであれば、<br>
+	本文に対して自動カーニングを適用しても大丈夫。<br/>
+	ただし、<span style="font-weight: bold;">現在のバージョン</span>ではオートカーニング適用先の要素の中に HTMLタグ がある場合の動作は保証できない。<br />
+	<span style="font-size: 18px;">「どでかい。」</span>
+</p>
+
+</body>
+</html>
