@@ -51,7 +51,7 @@
 	};
 
 	var getRenderingFontFamily = function() {
-		
+
 	};
 
 	var karning = function(textData, isBOL, fontFamily) {
